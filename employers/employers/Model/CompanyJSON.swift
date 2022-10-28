@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CompanyJSON: Codable {
+final class CompanyJSON: NSObject, Codable {
     let company: Company
 }
 

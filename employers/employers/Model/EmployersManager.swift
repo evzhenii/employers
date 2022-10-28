@@ -18,7 +18,7 @@ struct EmployersManager {
     let stringUrl = "https://run.mocky.io/v3/1d1cb4ec-73db-4762-8c4b-0b8aa3cecd4c"
     var delegate: EmployersManagerDelegate?
     
-    func load() {
+    func load(completion: @escaping ((CompanyJSON?) -> Void)) {
         guard let url = URL(string: stringUrl) else {
             print("Cannot convert string URL to URL")
             return
@@ -34,10 +34,10 @@ struct EmployersManager {
             guard let safeData = data else {
                 print("no data")
                 return
-                
             }
             if let companyJSON = parseJSON(safeData) {
                 print(companyJSON)
+                completion(companyJSON)
             }
         }
         task.resume()
