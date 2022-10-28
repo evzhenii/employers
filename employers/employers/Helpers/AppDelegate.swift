@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
-        window.rootViewController = EmployerListViewController()
+        window.rootViewController = UINavigationController(rootViewController: SpinnerViewController())
         self.window = window
         
         return true

@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         window.makeKeyAndVisible()
-        window.rootViewController = EmployerListViewController()
+        window.rootViewController = UINavigationController(rootViewController: SpinnerViewController())
         self.window = window
         
     }
