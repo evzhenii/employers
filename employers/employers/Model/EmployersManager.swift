@@ -36,7 +36,6 @@ struct EmployersManager {
                 return
             }
             if let companyJSON = parseJSON(safeData) {
-                print(companyJSON)
                 completion(companyJSON)
             }
         }

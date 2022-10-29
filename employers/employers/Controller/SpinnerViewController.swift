@@ -8,29 +8,41 @@
 import UIKit
 
 class SpinnerViewController: UIViewController {
-
+    
     let spinnerView = SpinnerView()
-    var employerManager = EmployersManager()
+    var employersManager = EmployersManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
-        employerManager.delegate = self
-
+        
+        employersManager.delegate = self
+        
         view.addSubview(spinnerView)
         spinnerView.center = view.center
-//        spinnerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        spinnerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.spinnerView.spinner.stopAnimating()
-            let employerTableViewController = EmployerTableViewController()
-            employerTableViewController.modalPresentationStyle = .fullScreen
-            self.present(employerTableViewController, animated: true)
+        
+        employersManager.load { [weak self] (companyJSON) in
+            guard let companyJSON = companyJSON else { return }
+            
+            DispatchQueue.main.async {
+                
+                let employerTableViewController = EmployerTableViewController()
+                
+                employerTableViewController.modalPresentationStyle = .fullScreen
+                
+                employerTableViewController.cachedDataSource.setObject(companyJSON, forKey: "Avito" as AnyObject)
+                
+                self?.spinnerView.spinner.stopAnimating()
+                self?.present(employerTableViewController, animated: true)
+            }
         }
     }
-
 }
+
+
+
 
 //MARK: - EmployersManagerDelegate
 extension SpinnerViewController: EmployersManagerDelegate {
