@@ -8,17 +8,21 @@
 import Foundation
 
 final class CompanyJSON: NSObject, Codable {
-    let company: Company
+    var company: Company
 }
 
 struct Company: Codable {
     let name: String
-    let employees: [Employee]
+    var employees: [Employee]
 }
 
-struct Employee: Codable {
+struct Employee: Codable, Comparable {
     let name: String
     let phone_number: String
     let skills: [String]
+    
+    static func < (lhs: Employee, rhs: Employee) -> Bool {
+            lhs.name < rhs.name
+        }
 }
 

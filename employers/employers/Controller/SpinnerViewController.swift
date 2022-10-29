@@ -34,6 +34,8 @@ class SpinnerViewController: UIViewController {
                 
                 employerTableViewController.cachedDataSource.setObject(companyJSON, forKey: "Avito" as AnyObject)
                 
+                employerTableViewController.title = employerTableViewController.cachedDataSource.object(forKey: "Avito" as AnyObject)?.company.name
+                
                 self?.spinnerView.spinner.stopAnimating()
                 self?.present(employerTableViewController, animated: true)
             }

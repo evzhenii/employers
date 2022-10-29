@@ -11,13 +11,13 @@ import UIKit
 
 class EmployerTableViewController: UITableViewController {
     
-    let spinner = SpinnerView()
-    var companyJSON: CompanyJSON?
     let cachedDataSource = NSCache<AnyObject, CompanyJSON>()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = cachedDataSource.object(forKey: "Avito" as AnyObject)?.company.name
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
     }
@@ -33,6 +33,10 @@ class EmployerTableViewController: UITableViewController {
         }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

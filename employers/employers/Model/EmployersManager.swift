@@ -36,12 +36,12 @@ struct EmployersManager {
                 return
             }
             if let companyJSON = parseJSON(safeData) {
+                companyJSON.company.employees = companyJSON.company.employees.sorted()
                 completion(companyJSON)
             }
         }
         task.resume()
     }
-    
     private func parseJSON(_ data: Data) -> CompanyJSON? {
         let decoder = JSONDecoder()
         do {
