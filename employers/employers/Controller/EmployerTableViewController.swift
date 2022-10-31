@@ -6,8 +6,7 @@
 //
 
 import UIKit
-
-
+import Network
 
 class EmployerTableViewController: UITableViewController {
     
@@ -20,6 +19,8 @@ class EmployerTableViewController: UITableViewController {
         self.title = cachedDataSource.object(forKey: "Avito" as AnyObject)?.company.name
         
         tableView.register(EmployeeTableViewCell.self, forCellReuseIdentifier: EmployeeTableViewCell.identifier)
+        
+        monitorNetwork()
     }
     
     
@@ -62,4 +63,18 @@ class EmployerTableViewController: UITableViewController {
             return 1
         }
     }
+    
+    private func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .unsatisfied {
+                print("network unsatisfied")
+            }
+        }
+        
+        let queue = DispatchQueue(label: "Network")
+        monitor.start(queue: queue)
+    }
+    
+//    private func 
 }
