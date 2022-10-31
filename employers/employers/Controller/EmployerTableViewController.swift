@@ -37,7 +37,7 @@ class EmployerTableViewController: UITableViewController {
             cell.nameLabel.text = name
             
             let number = companyJSON.company.employees[indexPath.row].phone_number
-            cell.numberButton.setTitle(number, for: .normal)
+            cell.phoneButton.setTitle(number, for: .normal)
             
             let skills = companyJSON.company.employees[indexPath.row].skills
             let joinedSkills = skills.joined(separator: ", ")

@@ -22,6 +22,7 @@ class EmployeeTableViewCell: UITableViewCell {
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.alignment = .leading
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -34,10 +35,31 @@ class EmployeeTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var numberButton: UIButton = {
+    lazy var phoneStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.spacing = 10
+        stack.alignment = .leading
+        stack.distribution = .fillProportionally
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private let phoneLabel: UILabel = {
+        let label = UILabel()
+        label.text = "tel:"
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var phoneButton: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.setTitleColor(.label, for: .normal)
+        button.setTitleColor(.link, for: .normal)
+        button.layer.borderWidth = 2
+        button.layer.cornerRadius = 15
+        button.layer.borderColor = UIColor.link.cgColor
+        button.setImage(UIImage(systemName: "phone"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -53,7 +75,9 @@ class EmployeeTableViewCell: UITableViewCell {
     private func viewSetup() {
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(nameLabel)
-        stackView.addArrangedSubview(numberButton)
+        stackView.addArrangedSubview(phoneButton)
+//        phoneStackView.addArrangedSubview(phoneLabel)
+//        phoneStackView.addArrangedSubview(phoneButton)
         stackView.addArrangedSubview(skillsLabel)
     }
     
@@ -63,6 +87,12 @@ class EmployeeTableViewCell: UITableViewCell {
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             stackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -40),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            
+            phoneButton.widthAnchor.constraint(equalToConstant: 120),
+            phoneButton.heightAnchor.constraint(equalToConstant: 40),
+            
+//            phoneStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+//            phoneStackView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
         ])
     }
     
