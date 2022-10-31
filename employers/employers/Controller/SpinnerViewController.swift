@@ -15,7 +15,7 @@ class SpinnerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = .tertiarySystemBackground
         
         networkingManager.delegate = self
         
@@ -29,7 +29,7 @@ class SpinnerViewController: UIViewController {
                 
                 let employerTableViewController = EmployersTableViewController()
                 
-                employerTableViewController.cachedDataSource.setObject(companyJSON, forKey: "Avito" as AnyObject)
+                employerTableViewController.cachedDataSource.setObject(companyJSON, forKey: Constants.companyJSONKey as AnyObject)
                 
                 let companyNavigationController = CompanyNavigationController(rootViewController: employerTableViewController)
                 
@@ -44,10 +44,10 @@ class SpinnerViewController: UIViewController {
 
 
 //MARK: - EmployersManagerDelegate
-extension SpinnerViewController: EmployersManagerDelegate {
-    
-    func didFailWithError(_ error: Error) {
-        print("oh no")
+extension SpinnerViewController: ErrorHandlerDelegate {
+    func presentError(_ error: String) {
+        print(error)
     }
+    
 }
 

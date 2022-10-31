@@ -9,9 +9,11 @@ import UIKit
 
 struct EmployersManager {
     
+    var delegate: ErrorHandlerDelegate?
+    
     func makeCall(with phoneNumber: String) {
         var urlComponents = URLComponents()
-        urlComponents.scheme = "tel"
+        urlComponents.scheme = Constants.urlComponentsScheme
         urlComponents.path = phoneNumber
         
         guard let url = urlComponents.url,
@@ -22,4 +24,6 @@ struct EmployersManager {
             UIApplication.shared.openURL(url)
         }
     }
+    
+    
 }

@@ -9,7 +9,6 @@ import UIKit
 
 class EmployeeTableViewCell: UITableViewCell {
 
-    static let identifier = "EmployeeTableViewCell"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

@@ -6,32 +6,27 @@
 //
 
 import Foundation
-
-protocol EmployersManagerDelegate {
-    
-    func didFailWithError(_ error: Error)
-}
+import Network
 
 struct NetworkingManager {
     
-    let stringUrl = "https://run.mocky.io/v3/1d1cb4ec-73db-4762-8c4b-0b8aa3cecd4c"
-    var delegate: EmployersManagerDelegate?
+    var delegate: ErrorHandlerDelegate?
     
     func load(completion: @escaping ((CompanyJSON?) -> Void)) {
-        guard let url = URL(string: stringUrl) else {
-            print("Cannot convert string URL to URL")
+        guard let url = URL(string: Constants.url) else {
+            delegate?.presentError(Constants.Errors.cannotConvertURL)
             return
         }
         let session = URLSession(configuration: .default)
         
         let task = session.dataTask(with: url) { (data, response, error) in
-            guard error == nil else {
-                self.delegate?.didFailWithError(error!)
+            if let error = error {
+                delegate?.presentError(error.localizedDescription)
                 return
             }
             
             guard let safeData = data else {
-                print("no data")
+                delegate?.presentError(Constants.Errors.missingData)
                 return
             }
             if let companyJSON = parseJSON(safeData) {
@@ -42,13 +37,25 @@ struct NetworkingManager {
         task.resume()
     }
     
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .unsatisfied {
+                delegate?.presentError(Constants.Errors.lostConnection)
+            }
+        }
+        
+        let queue = DispatchQueue(label: Constants.nwPathMonitorQueue)
+        monitor.start(queue: queue)
+    }
+    
     private func parseJSON(_ data: Data) -> CompanyJSON? {
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode(CompanyJSON.self, from: data)
             return decodedData
         } catch {
-            delegate?.didFailWithError(error)
+            delegate?.presentError(error.localizedDescription)
             return nil
         }
     }
