@@ -12,6 +12,7 @@ import UIKit
 class EmployerTableViewController: UITableViewController {
     
     let cachedDataSource = NSCache<AnyObject, CompanyJSON>()
+    let cellSpacingHeight: CGFloat = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,16 +33,13 @@ class EmployerTableViewController: UITableViewController {
         
         if let companyJSON = cachedDataSource.object(forKey: "Avito" as AnyObject) {
             let name = companyJSON.company.employees[indexPath.row].name
-            print(name)
             cell.nameLabel.text = name
-            
             
             let number = companyJSON.company.employees[indexPath.row].phone_number
             cell.numberButton.setTitle(number, for: .normal)
             
             let skills = companyJSON.company.employees[indexPath.row].skills
             let joinedSkills = skills.joined(separator: ", ")
-            print(joinedSkills)
             cell.skillsLabel.text = joinedSkills
         }
         
@@ -49,16 +47,15 @@ class EmployerTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if let employeesCount = cachedDataSource.object(forKey: "Avito" as AnyObject)?.company.employees.count {
             return employeesCount
         } else {

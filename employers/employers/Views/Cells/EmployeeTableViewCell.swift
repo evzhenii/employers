@@ -13,10 +13,11 @@ class EmployeeTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        contentView.backgroundColor = .lightGray
         viewSetup()
         layoutSetup()
     }
+    
+
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -58,12 +59,10 @@ class EmployeeTableViewCell: UITableViewCell {
     
     private func layoutSetup() {
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
-//            nameLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, )
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            stackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -40),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
         ])
     }
     

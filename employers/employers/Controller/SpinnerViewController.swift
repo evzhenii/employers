@@ -10,34 +10,31 @@ import UIKit
 class SpinnerViewController: UIViewController {
     
     let spinnerView = SpinnerView()
-    var employersManager = EmployersManager()
+    var networkingManager = NetworkingManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         
-        employersManager.delegate = self
+        networkingManager.delegate = self
         
         view.addSubview(spinnerView)
         spinnerView.center = view.center
         
-        
-        employersManager.load { [weak self] (companyJSON) in
+        networkingManager.load { [weak self] (companyJSON) in
             guard let companyJSON = companyJSON else { return }
             
             DispatchQueue.main.async {
                 
                 let employerTableViewController = EmployerTableViewController()
                 
-                employerTableViewController.modalPresentationStyle = .fullScreen
-                
                 employerTableViewController.cachedDataSource.setObject(companyJSON, forKey: "Avito" as AnyObject)
                 
-                employerTableViewController.title = employerTableViewController.cachedDataSource.object(forKey: "Avito" as AnyObject)?.company.name
+                let companyNavigationController = CompanyNavigationController(rootViewController: employerTableViewController)
                 
                 self?.spinnerView.spinner.stopAnimating()
-                self?.present(employerTableViewController, animated: true)
+                self?.present(companyNavigationController, animated: true)
             }
         }
     }
