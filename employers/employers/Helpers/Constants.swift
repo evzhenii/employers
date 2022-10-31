@@ -19,6 +19,10 @@ struct Constants {
     
     static let nwPathMonitorQueue = "Network"
     
+    static let noInternetSystemImage = "wifi.slash"
+    
+    static let genericErrorMessage = "Whoops, I got an erorr :("
+    
     struct Errors {
         static let missingData = "Wow, I couldn`t get data from server. That is strange. Already trying to fix it. Thanks for your patience, try again later"
         

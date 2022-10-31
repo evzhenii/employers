@@ -37,18 +37,6 @@ struct NetworkingManager {
         task.resume()
     }
     
-    func monitorNetwork() {
-        let monitor = NWPathMonitor()
-        monitor.pathUpdateHandler = { path in
-            if path.status == .unsatisfied {
-                delegate?.presentError(Constants.Errors.lostConnection)
-            }
-        }
-        
-        let queue = DispatchQueue(label: Constants.nwPathMonitorQueue)
-        monitor.start(queue: queue)
-    }
-    
     private func parseJSON(_ data: Data) -> CompanyJSON? {
         let decoder = JSONDecoder()
         do {

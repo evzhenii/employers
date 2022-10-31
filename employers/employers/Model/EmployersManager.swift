@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import Network
 
 struct EmployersManager {
     
-    var delegate: ErrorHandlerDelegate?
+    var delegate: EmployersManagerDelegate?
     
     func makeCall(with phoneNumber: String) {
         var urlComponents = URLComponents()
@@ -25,5 +26,17 @@ struct EmployersManager {
         }
     }
     
-    
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .unsatisfied {
+                delegate?.lostConnection()
+            } else {
+                delegate?.restoredConnection()
+            }
+        }
+        
+        let queue = DispatchQueue(label: Constants.nwPathMonitorQueue)
+        monitor.start(queue: queue)
+    }
 }

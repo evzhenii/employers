@@ -7,20 +7,22 @@
 
 import UIKit
 
-class EmployersTableViewController: UITableViewController {
+final class EmployersTableViewController: UITableViewController {
     
     let cachedDataSource = NSCache<AnyObject, CompanyJSON>()
-    let employersManager = EmployersManager()
-    var networkingManager = NetworkingManager()
+    var employersManager = EmployersManager()
+    let networkingManager = NetworkingManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        employersManager.delegate = self
         
         self.title = cachedDataSource.object(forKey: Constants.companyJSONKey as AnyObject)?.company.name
         
         tableView.register(EmployeeTableViewCell.self, forCellReuseIdentifier: Constants.employeeTableViewCellIdentifier)
         
-        networkingManager.monitorNetwork()
+        employersManager.monitorNetwork()
     }
     
     
@@ -33,7 +35,6 @@ class EmployersTableViewController: UITableViewController {
         
         if let companyJSON = cachedDataSource.object(forKey: Constants.companyJSONKey as AnyObject) {
             
-            cell.isUserInteractionEnabled = false
             let name = companyJSON.company.employees[indexPath.row].name
             cell.nameLabel.text = name
             
@@ -48,6 +49,10 @@ class EmployersTableViewController: UITableViewController {
         }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     @objc func phoneButtonPressed(_ sender: Any) {
@@ -71,10 +76,35 @@ class EmployersTableViewController: UITableViewController {
         }
     }
     
+    @objc func refreshButtonTapped() {
+        networkingManager.load { companyJSON in
+            guard let companyJSON else { return }
+            self.cachedDataSource.setObject(companyJSON, forKey: Constants.companyJSONKey as AnyObject)
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }
 
-extension EmployersManager: ErrorHandlerDelegate {
-    func presentError(_ error: String) {
-        print(error)
+//MARK: - EmployersManager
+extension EmployersTableViewController: EmployersManagerDelegate {
+    
+    func lostConnection() {
+        DispatchQueue.main.async {
+            let alert = NotificationAlertController(title: Constants.genericErrorMessage, message: Constants.Errors.lostConnection, preferredStyle: .alert)
+            self.present(alert, animated: true)
+            let configuration = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold, scale: .large)
+
+            let noInternetImage = UIImage(systemName: Constants.noInternetSystemImage, withConfiguration: configuration)
+            let refreshBarButtonItem = UIBarButtonItem(customView: UIImageView(image: noInternetImage))
+            self.navigationItem.rightBarButtonItem = refreshBarButtonItem
+        }
+    }
+    
+    func restoredConnection() {
+        DispatchQueue.main.async {
+        self.navigationItem.rightBarButtonItem?.isHidden = true
+        }
     }
 }

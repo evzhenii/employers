@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompanyNavigationController: UINavigationController {
+final class CompanyNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

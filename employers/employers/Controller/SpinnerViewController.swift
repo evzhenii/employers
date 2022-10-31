@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SpinnerViewController: UIViewController {
+final class SpinnerViewController: UIViewController {
     
     let spinnerView = SpinnerView()
     var networkingManager = NetworkingManager()
@@ -22,6 +22,10 @@ class SpinnerViewController: UIViewController {
         view.addSubview(spinnerView)
         spinnerView.center = view.center
         
+        downloadData()
+    }
+    
+    func downloadData() {
         networkingManager.load { [weak self] (companyJSON) in
             guard let companyJSON = companyJSON else { return }
             
@@ -34,19 +38,28 @@ class SpinnerViewController: UIViewController {
                 let companyNavigationController = CompanyNavigationController(rootViewController: employerTableViewController)
                 
                 self?.spinnerView.spinner.stopAnimating()
+                
                 self?.present(companyNavigationController, animated: true)
             }
         }
     }
 }
 
-
-
-
 //MARK: - EmployersManagerDelegate
 extension SpinnerViewController: ErrorHandlerDelegate {
+    
     func presentError(_ error: String) {
-        print(error)
+        
+        DispatchQueue.main.async {
+            let alert = NotificationAlertController(title: Constants.genericErrorMessage, message: error, preferredStyle: .alert)
+            
+            alert.dismissAlertAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
+                self.downloadData()
+                alert.dismiss(animated: true)
+            })
+            
+            self.present(alert, animated: true)
+        }
     }
     
 }

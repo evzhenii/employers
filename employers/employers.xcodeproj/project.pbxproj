@@ -20,6 +20,8 @@
 		59AD121C29101DF100839BE6 /* EmployersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AD121B29101DF100839BE6 /* EmployersManager.swift */; };
 		59AD121E29101F7100839BE6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AD121D29101F7100839BE6 /* Constants.swift */; };
 		59AD12202910220700839BE6 /* ErrorHandlerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AD121F2910220700839BE6 /* ErrorHandlerDelegate.swift */; };
+		59AD122A29102CE100839BE6 /* EmployersManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AD122929102CE100839BE6 /* EmployersManagerDelegate.swift */; };
+		59AD122C29103A0600839BE6 /* NotificationAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AD122B29103A0600839BE6 /* NotificationAlertController.swift */; };
 		59E6C01E290C427000DA4CC3 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E6C01D290C427000DA4CC3 /* SpinnerViewController.swift */; };
 		59E6C020290C436500DA4CC3 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E6C01F290C436500DA4CC3 /* SpinnerView.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +42,8 @@
 		59AD121B29101DF100839BE6 /* EmployersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployersManager.swift; sourceTree = "<group>"; };
 		59AD121D29101F7100839BE6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		59AD121F2910220700839BE6 /* ErrorHandlerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlerDelegate.swift; sourceTree = "<group>"; };
+		59AD122929102CE100839BE6 /* EmployersManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployersManagerDelegate.swift; sourceTree = "<group>"; };
+		59AD122B29103A0600839BE6 /* NotificationAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAlertController.swift; sourceTree = "<group>"; };
 		59E6C01D290C427000DA4CC3 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		59E6C01F290C436500DA4CC3 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +93,7 @@
 				5909B862290BA64A0046D7A9 /* EmployersTableViewController.swift */,
 				59E6C01D290C427000DA4CC3 /* SpinnerViewController.swift */,
 				59AD1217290FE27200839BE6 /* CompanyNavigationController.swift */,
+				59AD122B29103A0600839BE6 /* NotificationAlertController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -108,6 +113,7 @@
 			children = (
 				5909B879290BB9680046D7A9 /* NetworkingManager.swift */,
 				59AD121B29101DF100839BE6 /* EmployersManager.swift */,
+				59AD122929102CE100839BE6 /* EmployersManagerDelegate.swift */,
 				5909B87B290BE30D0046D7A9 /* CompanyJSON.swift */,
 				59AD121F2910220700839BE6 /* ErrorHandlerDelegate.swift */,
 			);
@@ -214,7 +220,9 @@
 				59E6C01E290C427000DA4CC3 /* SpinnerViewController.swift in Sources */,
 				59AD1218290FE27200839BE6 /* CompanyNavigationController.swift in Sources */,
 				5909B861290BA64A0046D7A9 /* SceneDelegate.swift in Sources */,
+				59AD122A29102CE100839BE6 /* EmployersManagerDelegate.swift in Sources */,
 				59AD121E29101F7100839BE6 /* Constants.swift in Sources */,
+				59AD122C29103A0600839BE6 /* NotificationAlertController.swift in Sources */,
 				59AD121A291009AD00839BE6 /* PhoneButton.swift in Sources */,
 				59E6C020290C436500DA4CC3 /* SpinnerView.swift in Sources */,
 			);

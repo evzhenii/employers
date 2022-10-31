@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SpinnerView: UIView {
+final class SpinnerView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
