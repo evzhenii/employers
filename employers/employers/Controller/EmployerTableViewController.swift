@@ -38,6 +38,8 @@ class EmployerTableViewController: UITableViewController {
             
             let number = companyJSON.company.employees[indexPath.row].phone_number
             cell.phoneButton.setTitle(number, for: .normal)
+            cell.phoneButton.phone = number
+            cell.phoneButton.addTarget(self, action: #selector(phoneButtonPressed), for: .touchUpInside)
             
             let skills = companyJSON.company.employees[indexPath.row].skills
             let joinedSkills = skills.joined(separator: ", ")
@@ -45,6 +47,25 @@ class EmployerTableViewController: UITableViewController {
         }
         
         return cell
+    }
+    
+    @objc func phoneButtonPressed(_ sender: Any) {
+        guard let phoneNumber = (sender as? PhoneButton)?.phone else {
+            print("cannot get phone number")
+            return
+        }
+        
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "tel"
+        urlComponents.path = phoneNumber
+        
+        guard let url = urlComponents.url,
+                    UIApplication.shared.canOpenURL(url) else { return }
+                if #available(iOS 10, *) {
+                    UIApplication.shared.open(url)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -76,5 +97,4 @@ class EmployerTableViewController: UITableViewController {
         monitor.start(queue: queue)
     }
     
-//    private func 
 }

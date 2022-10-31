@@ -14,7 +14,5 @@ class CompanyNavigationController: UINavigationController {
 
         modalPresentationStyle = .fullScreen
         navigationBar.prefersLargeTitles = true
-        let attributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 32)]
-        UINavigationBar.appearance().titleTextAttributes = attributes
     }
 }

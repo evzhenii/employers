@@ -35,25 +35,8 @@ class EmployeeTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var phoneStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.spacing = 10
-        stack.alignment = .leading
-        stack.distribution = .fillProportionally
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    private let phoneLabel: UILabel = {
-        let label = UILabel()
-        label.text = "tel:"
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var phoneButton: UIButton = {
-        let button = UIButton()
+    lazy var phoneButton: PhoneButton = {
+        let button = PhoneButton()
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.setTitleColor(.link, for: .normal)
         button.layer.borderWidth = 2
@@ -66,7 +49,7 @@ class EmployeeTableViewCell: UITableViewCell {
     
     lazy var skillsLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+//        label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -76,8 +59,6 @@ class EmployeeTableViewCell: UITableViewCell {
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(phoneButton)
-//        phoneStackView.addArrangedSubview(phoneLabel)
-//        phoneStackView.addArrangedSubview(phoneButton)
         stackView.addArrangedSubview(skillsLabel)
     }
     
@@ -90,9 +71,6 @@ class EmployeeTableViewCell: UITableViewCell {
             
             phoneButton.widthAnchor.constraint(equalToConstant: 120),
             phoneButton.heightAnchor.constraint(equalToConstant: 40),
-            
-//            phoneStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-//            phoneStackView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
         ])
     }
     

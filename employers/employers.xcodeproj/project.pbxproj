@@ -16,6 +16,7 @@
 		5909B87C290BE30D0046D7A9 /* CompanyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5909B87B290BE30D0046D7A9 /* CompanyJSON.swift */; };
 		59AD1215290FB2E700839BE6 /* EmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AD1214290FB2E700839BE6 /* EmployeeTableViewCell.swift */; };
 		59AD1218290FE27200839BE6 /* CompanyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AD1217290FE27200839BE6 /* CompanyNavigationController.swift */; };
+		59AD121A291009AD00839BE6 /* PhoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AD1219291009AD00839BE6 /* PhoneButton.swift */; };
 		59E6C01E290C427000DA4CC3 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E6C01D290C427000DA4CC3 /* SpinnerViewController.swift */; };
 		59E6C020290C436500DA4CC3 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E6C01F290C436500DA4CC3 /* SpinnerView.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +33,7 @@
 		5909B87B290BE30D0046D7A9 /* CompanyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyJSON.swift; sourceTree = "<group>"; };
 		59AD1214290FB2E700839BE6 /* EmployeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewCell.swift; sourceTree = "<group>"; };
 		59AD1217290FE27200839BE6 /* CompanyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyNavigationController.swift; sourceTree = "<group>"; };
+		59AD1219291009AD00839BE6 /* PhoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneButton.swift; sourceTree = "<group>"; };
 		59E6C01D290C427000DA4CC3 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		59E6C01F290C436500DA4CC3 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +92,7 @@
 			children = (
 				59E6C01F290C436500DA4CC3 /* SpinnerView.swift */,
 				59AD1216290FC7B800839BE6 /* Cells */,
+				59AD1219291009AD00839BE6 /* PhoneButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				59E6C01E290C427000DA4CC3 /* SpinnerViewController.swift in Sources */,
 				59AD1218290FE27200839BE6 /* CompanyNavigationController.swift in Sources */,
 				5909B861290BA64A0046D7A9 /* SceneDelegate.swift in Sources */,
+				59AD121A291009AD00839BE6 /* PhoneButton.swift in Sources */,
 				59E6C020290C436500DA4CC3 /* SpinnerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
