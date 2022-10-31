@@ -13,23 +13,36 @@ class EmployerTableViewController: UITableViewController {
     
     let cachedDataSource = NSCache<AnyObject, CompanyJSON>()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = cachedDataSource.object(forKey: "Avito" as AnyObject)?.company.name
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        tableView.register(EmployeeTableViewCell.self, forCellReuseIdentifier: EmployeeTableViewCell.identifier)
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: EmployeeTableViewCell.identifier, for: indexPath) as? EmployeeTableViewCell else {
+            print ("cannot convert cell")
+            return UITableViewCell()
+            
+        }
         
         if let companyJSON = cachedDataSource.object(forKey: "Avito" as AnyObject) {
             let name = companyJSON.company.employees[indexPath.row].name
-            cell.textLabel?.text = name
+            print(name)
+            cell.nameLabel.text = name
+            
+            
+            let number = companyJSON.company.employees[indexPath.row].phone_number
+            cell.numberButton.setTitle(number, for: .normal)
+            
+            let skills = companyJSON.company.employees[indexPath.row].skills
+            let joinedSkills = skills.joined(separator: ", ")
+            print(joinedSkills)
+            cell.skillsLabel.text = joinedSkills
         }
         
         return cell

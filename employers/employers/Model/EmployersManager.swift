@@ -7,11 +7,10 @@
 
 import Foundation
 
-
 protocol EmployersManagerDelegate {
+    
     func didFailWithError(_ error: Error)
 }
-
 
 struct EmployersManager {
     
@@ -42,6 +41,7 @@ struct EmployersManager {
         }
         task.resume()
     }
+    
     private func parseJSON(_ data: Data) -> CompanyJSON? {
         let decoder = JSONDecoder()
         do {
@@ -52,5 +52,4 @@ struct EmployersManager {
             return nil
         }
     }
-    
 }
