@@ -21,7 +21,9 @@ struct Constants {
     
     static let noInternetSystemImage = "wifi.slash"
     
-    static let genericErrorMessage = "Whoops, I got an erorr :("
+    static let genericErrorMessage = "Whoops, I got an error :("
+    
+    static let pullToRefresh = "Pull to refresh"
     
     struct Errors {
         static let missingData = "Wow, I couldn`t get data from server. That is strange. Already trying to fix it. Thanks for your patience, try again later"

@@ -23,15 +23,20 @@ final class EmployersTableViewController: UITableViewController {
         tableView.register(EmployeeTableViewCell.self, forCellReuseIdentifier: Constants.employeeTableViewCellIdentifier)
         
         employersManager.monitorNetwork()
+        
+        refreshControlSetup()
     }
     
+    private func refreshControlSetup() {
+        
+        self.refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: Constants.pullToRefresh)
+        refreshControl?.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.employeeTableViewCellIdentifier, for: indexPath) as? EmployeeTableViewCell else {
-            print ("cannot convert cell")
-            return UITableViewCell()
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.employeeTableViewCellIdentifier, for: indexPath) as? EmployeeTableViewCell else { return UITableViewCell() }
         
         if let companyJSON = cachedDataSource.object(forKey: Constants.companyJSONKey as AnyObject) {
             
@@ -69,20 +74,23 @@ final class EmployersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let employeesCount = cachedDataSource.object(forKey: Constants.companyJSONKey as AnyObject)?.company.employees.count {
+        
+        guard let employeesCount = cachedDataSource
+            .object(forKey: Constants.companyJSONKey as AnyObject)?
+            .company
+            .employees
+            .count else { return 1 }
             return employeesCount
-        } else {
-            return 1
-        }
     }
     
-    @objc func refreshButtonTapped() {
+    @objc func refresh(_ sender: AnyObject) {
         networkingManager.load { companyJSON in
             guard let companyJSON else { return }
             self.cachedDataSource.setObject(companyJSON, forKey: Constants.companyJSONKey as AnyObject)
         }
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
         }
     }
 }
@@ -99,6 +107,7 @@ extension EmployersTableViewController: EmployersManagerDelegate {
             let noInternetImage = UIImage(systemName: Constants.noInternetSystemImage, withConfiguration: configuration)
             let refreshBarButtonItem = UIBarButtonItem(customView: UIImageView(image: noInternetImage))
             self.navigationItem.rightBarButtonItem = refreshBarButtonItem
+            self.navigationItem.rightBarButtonItem?.isHidden = false
         }
     }
     
