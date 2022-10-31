@@ -8,10 +8,10 @@
 import UIKit
 import Network
 
-class EmployerTableViewController: UITableViewController {
+class EmployersTableViewController: UITableViewController {
     
     let cachedDataSource = NSCache<AnyObject, CompanyJSON>()
-    let cellSpacingHeight: CGFloat = 5
+    let employersManager = EmployersManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,6 @@ class EmployerTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EmployeeTableViewCell.identifier, for: indexPath) as? EmployeeTableViewCell else {
             print ("cannot convert cell")
             return UITableViewCell()
-            
         }
         
         if let companyJSON = cachedDataSource.object(forKey: "Avito" as AnyObject) {
@@ -55,17 +54,7 @@ class EmployerTableViewController: UITableViewController {
             return
         }
         
-        var urlComponents = URLComponents()
-        urlComponents.scheme = "tel"
-        urlComponents.path = phoneNumber
-        
-        guard let url = urlComponents.url,
-                    UIApplication.shared.canOpenURL(url) else { return }
-                if #available(iOS 10, *) {
-                    UIApplication.shared.open(url)
-                } else {
-                    UIApplication.shared.openURL(url)
-                }
+        employersManager.makeCall(with: phoneNumber)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

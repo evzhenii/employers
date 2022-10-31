@@ -17,8 +17,6 @@ class EmployeeTableViewCell: UITableViewCell {
         layoutSetup()
     }
     
-
-    
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -49,7 +47,7 @@ class EmployeeTableViewCell: UITableViewCell {
     
     lazy var skillsLabel: UILabel = {
         let label = UILabel()
-//        label.numberOfLines = 0
+        label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -58,8 +56,8 @@ class EmployeeTableViewCell: UITableViewCell {
     private func viewSetup() {
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(nameLabel)
-        stackView.addArrangedSubview(phoneButton)
         stackView.addArrangedSubview(skillsLabel)
+        stackView.addArrangedSubview(phoneButton)
     }
     
     private func layoutSetup() {
@@ -77,5 +75,4 @@ class EmployeeTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

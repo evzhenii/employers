@@ -27,7 +27,7 @@ class SpinnerViewController: UIViewController {
             
             DispatchQueue.main.async {
                 
-                let employerTableViewController = EmployerTableViewController()
+                let employerTableViewController = EmployersTableViewController()
                 
                 employerTableViewController.cachedDataSource.setObject(companyJSON, forKey: "Avito" as AnyObject)
                 
