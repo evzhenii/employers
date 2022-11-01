@@ -22,11 +22,13 @@ The project contains one main table view and one supportive spinner screen.
 * Protocol-delegate pattern
 
 ## Features
-* Icon + notification indicating networking errors
-* Dark/white theme
-* iPad support
-* Pull to refresh 
+* Employees sorted by alphabetical order
+* iPad and iPhone support
 * Caching parsed data
+* Icon + notification indicating networking errors
+* Make a call by tapping on number
+* Dark/white theme
+* Pull to refresh 
 
 ## Requirements
 * iOS 13.0+
